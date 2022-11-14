@@ -160,8 +160,9 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            pip install pip --upgrade
-            pip install ansible awscli
+            apk add curl
+            apk add --update ansible
+            pip install awscli
       - run:
           name: Configure server
           command: |
