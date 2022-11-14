@@ -12,7 +12,7 @@
 - name: "install dependencies."
   become: yes
   apt:
-    name: ["python3", "nodejs", "npm"]
+    name: ["python", "nodejs", "npm"]
     state: latest
     update_cache: yes
 
