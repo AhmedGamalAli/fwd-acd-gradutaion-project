@@ -232,6 +232,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+              sudo apt-get install npm
               cd frontend
               npm install
       - run:
