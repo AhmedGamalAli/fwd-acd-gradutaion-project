@@ -1,0 +1,25 @@
+- name: "Create directory"
+  file:
+    path: ~/web
+    state: directory
+
+- name: "Extract zipped backend files"
+  extract:
+    src: artifact.tar.gz
+    dest: ~/web
+
+- name: "Install node dependencies"
+  shell: |
+    cd ~/web
+    npm install
+
+- name: "Executing node"
+  shell: |
+    cd ~/web/dist
+    pm2 stop default
+    pm2 start npm -- start
+  register: execute_node
+
+- name: "Print execute_node"
+  debug:
+    msg: "{{ execute_node.stdout_lines }}"
