@@ -30,8 +30,7 @@ commands:
             then
               cd backend
               npm install
-              npm run build
-              npm run migration:revert
+              npm run migrations:revert
             fi
 
 jobs:
@@ -315,10 +314,8 @@ jobs:
           name: Backend smoke test.
           command: |
               # Fetch and prepare the BACKEND_IP env var
-              # export API_URL="http://${BACKEND_IP}:3030"
               cat ~/api_url.txt
               export API_URL=$(cat ~/api_url.txt)
-              echo "${API_URL}"
               if curl -s "${API_URL}/api/status" | grep "ok"
               then
                   exit 0
