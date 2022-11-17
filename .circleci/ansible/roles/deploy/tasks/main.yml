@@ -5,9 +5,9 @@
     state: directory
 
 - name: "Extract zipped backend files"
-  unarchive:
-    src: artifact.tar.gz
-    dest: ~/web
+  ansible.builtin.shell: tar -xzf artifact.tar.gz
+    # src: artifact.tar.gz
+    # dest: ~/web
 
 - name: "Install node dependencies"
   shell: |
