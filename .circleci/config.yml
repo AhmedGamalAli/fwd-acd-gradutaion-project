@@ -260,8 +260,8 @@ jobs:
           paths:
             - api_url.txt
       # Here's where you will add some code to rollback on failure
-      # - destroy-environment
-      # - revert-migrations
+      - destroy-environment
+      - revert-migrations
 
   deploy-backend:
     docker:
@@ -293,7 +293,7 @@ jobs:
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
-            ANSIBLE_HOST_KEY_CHECKING=False
+            export ANSIBLE_HOST_KEY_CHECKING=False
             ansible-playbook -i inventory.txt deploy-backend.yml
       # - destroy-environment
       # - revert-migrations
