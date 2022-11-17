@@ -283,9 +283,8 @@ jobs:
       - run:
           name: Deploy backend
           command: |
-            export ANSIBLE_HOST_KEY_CHECKING=False
             cd backend
-            npm i
+            npm install
             npm run build
             cd ..
             # Zip the directory
@@ -294,6 +293,7 @@ jobs:
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
+            ANSIBLE_HOST_KEY_CHECKING=False
             ansible-playbook -i inventory.txt deploy-backend.yml
       # - destroy-environment
       # - revert-migrations
