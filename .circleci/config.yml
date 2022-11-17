@@ -26,7 +26,7 @@ commands:
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
             SUCCESS = $(curl --insecure https://kvdb.io/RKebWoHMo3967ytL6ptqPC/migration_$\{CIRCLE_WORKFLOW_ID:0:7\})
-            if(( $SUCCESS==1 )); 
+            if [[ $SUCCESS==1 ]]; 
             then
               cd backend
               npm install
@@ -314,7 +314,8 @@ jobs:
           name: Backend smoke test.
           command: |
               # Fetch and prepare the BACKEND_IP env var
-              export API_URL="http://${BACKEND_IP}:3030"
+              # export API_URL="http://${BACKEND_IP}:3030"
+              cat ~/api_url.txt
               echo "${API_URL}"
               if curl "${API_URL}/api/status" | grep "ok"
               then
