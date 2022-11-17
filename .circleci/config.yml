@@ -331,7 +331,7 @@ jobs:
               else
                 return 1
               fi
-      - destroy_environment  
+      - destroy-environment
       - revert_migrations  
 
 
