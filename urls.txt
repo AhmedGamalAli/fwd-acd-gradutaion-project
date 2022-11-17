@@ -1,2 +1,2 @@
 1 - Public URL to my GitHub repository: https://github.com/AhmedGamalAli/fwd-acd-gradutaion-project [URL01]
-2 - Public URL to S3 bucket (aka, my frontend): http://udapeople-556964a.s3-website-us-east-1.amazonaws.com [URL02]
+2 - Public URL to S3 bucket (aka, my frontend): http://udapeople-31599f1.s3-website-us-east-1.amazonaws.com [URL02]
