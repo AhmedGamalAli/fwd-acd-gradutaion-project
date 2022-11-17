@@ -25,7 +25,7 @@ commands:
           when: on_fail
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            SUCCESS=$(curl --insecure https://kvdb.io/GHWiQHKEWHASfX4ppMBM1f/migration_$\{CIRCLE_WORKFLOW_ID:0:7\})
+            SUCCESS=$(curl --insecure https://kvdb.io/ADnSo7nVKBrx85JfXJyT89/migration_$\{CIRCLE_WORKFLOW_ID:0:7\})
             if [[ $SUCCESS==1 ]]; 
             then
               cd backend
@@ -220,7 +220,7 @@ jobs:
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-              curl https://kvdb.io/GHWiQHKEWHASfX4ppMBM1f/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+              curl --insecure https://kvdb.io/ADnSo7nVKBrx85JfXJyT89/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
       - destroy-environment
 
@@ -332,25 +332,25 @@ jobs:
               else
                 exit 1
               fi
-      - destroy-environment
+      # - destroy-environment
       - revert-migrations  
 
 
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
-      - scan-backend:
-          requires: [build-backend]
+      # - build-frontend
+      # - build-backend
+      # - test-frontend:
+      #     requires: [build-frontend]
+      # - test-backend:
+      #     requires: [build-backend]
+      # - scan-frontend:
+      #     requires: [build-frontend]
+      # - scan-backend:
+      #     requires: [build-backend]
       - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          # requires: [test-frontend, test-backend, scan-frontend, scan-backend]
           filters:
             branches:
               only: [master]
