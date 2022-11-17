@@ -317,12 +317,12 @@ jobs:
               cat ~/api_url.txt
               export API_URL=$(cat ~/api_url.txt)
               echo "${API_URL}" 
-              if curl -s "${API_URL}/api/status" | grep "ok"
-                then
-                    exit 0
-                else
-                    exit 1
-                fi
+              if curl -s ${API_URL}/api/status | grep "ok"
+              then
+                  exit 0
+              else
+                  exit 1
+              fi
       - run:
           name: Frontend smoke test.
           command: |
