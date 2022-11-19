@@ -367,7 +367,7 @@ jobs:
           paths:
             - OldWorkflowID.txt
       - destroy-environment  
-      - revert_migrations  
+      - revert-migrations 
 
 workflows:
   default:
