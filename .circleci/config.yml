@@ -366,7 +366,7 @@ jobs:
           root: ~/
           paths:
             - OldWorkflowID.txt
-      - destroy_environment  
+      - destroy-environment  
       - revert_migrations  
 
 workflows:
