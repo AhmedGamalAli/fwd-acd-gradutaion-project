@@ -328,13 +328,46 @@ jobs:
           command: |
               if curl -s http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-us-east-1.amazonaws.com/#/employees | grep "Welcome"
               then
-                exit 1
+                exit 0
               else
                 exit 1
               fi
       - destroy-environment
       - revert-migrations  
 
+  cloudfront-update:
+    docker:
+      - image: circleci/node:13:8:0
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt-get update -y
+            sudo apt-get install -y tar gzip
+            sudo apt-get install -y awscli
+      - run:
+          name: Update cloudfront distribution
+          command: |
+            export OldWorkflowID=$(aws cloudformation \ 
+              list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
+              --no-paginate --output text)
+            echo $OldWorkflowID > ~/OldWorkflowID.txt
+
+            aws cloudformation deploy \
+              --template-file .circleci/files/cloudfront.yml \
+              --stack-name CloudfrontStack \
+              --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
+              --tags project=udapeople
+
+            echo OldWorkflowID: "$(cat ~/OldWorkflowID.txt)"
+            echo Current Workflow ID: "${CIRCLE_WORKFLOW_ID:0:7}"
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - OldWorkflowID.txt
+      - destroy_environment  
+      - revert_migrations  
 
 workflows:
   default:
@@ -364,3 +397,5 @@ workflows:
           requires: [run-migrations]
       - smoke-test:
           requires: [deploy-frontend, deploy-backend]
+      - cloudfront-update:
+          requires: [smoke-test]
