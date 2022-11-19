@@ -344,12 +344,14 @@ jobs:
           name: Install dependencies
           command: |
             sudo apt-get update -y
-            sudo apt-get install -y tar gzip
             sudo apt-get install -y awscli
       - run:
           name: Update cloudfront distribution
           command: |
-            aws cloudformation deploy --template-file .circleci/files/cloudfront.yml --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" --stack-name InitialStack
+            aws cloudformation deploy \
+              --template-file .circleci/files/cloudfront.yml \
+              --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
+              --stack-name InitialStack
       - destroy-environment  
       - revert-migrations
 
