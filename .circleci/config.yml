@@ -25,7 +25,7 @@ commands:
           when: on_fail
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            SUCCESS=$(curl --insecure https://kvdb.io/Q2gvDwHaiCQr8Yg1tmj6Qh/migration_$\{CIRCLE_WORKFLOW_ID:0:7\})
+            SUCCESS=$(curl --insecure https://kvdb.io/5kFtrNzm9hM9QzwkfGAZFg/migration_$\{CIRCLE_WORKFLOW_ID:0:7\})
             if [[ $SUCCESS==1 ]]; 
             then
               cd backend
@@ -220,7 +220,7 @@ jobs:
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-              curl --insecure https://kvdb.io/Q2gvDwHaiCQr8Yg1tmj6Qh/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+              curl --insecure https://kvdb.io/5kFtrNzm9hM9QzwkfGAZFg/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
       - destroy-environment
 
@@ -375,7 +375,7 @@ jobs:
                 --query "StackSummaries[*].StackName" \
                 --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
             echo Stack names: "${STACKS[@]}"
-            export OldWorkflowID=$(curl --insecure https://kvdb.io/Q2gvDwHaiCQr8Yg1tmj6Qh/old_workflow_id)
+            export OldWorkflowID=$(curl --insecure https://kvdb.io/5kFtrNzm9hM9QzwkfGAZFg/old_workflow_id)
             echo Old Workflow ID: $OldWorkflowID 
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
