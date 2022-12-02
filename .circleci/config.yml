@@ -316,7 +316,7 @@ jobs:
               # Fetch and prepare the BACKEND_IP env var
               cat ~/api_url.txt
               export API_URL=$(cat ~/api_url.txt)
-              echo "${API_URL}" 
+              # echo "${API_URL}" 
               if curl -s ${API_URL}/api/status | grep "ok"
               then
                   exit 0
