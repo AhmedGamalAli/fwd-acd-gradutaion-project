@@ -1,5 +1,5 @@
 1 - Public URL to my GitHub repository: https://github.com/AhmedGamalAli/fwd-acd-gradutaion-project [URL01]
 2 - Public URL to S3 bucket (aka, my frontend): http://udapeople-635b5d5.s3-website-us-east-1.amazonaws.com [URL02]
-3 - URL showing the evidence of deployed and functioning front-end application in CloudFront (aka, your production front-end): d23neygwwdw8t3.cloudfront.net [URL03]
+3 - URL showing the evidence of deployed and functioning front-end application in CloudFront (aka, your production front-end): dzzhpfz7eiefc.cloudfront.net	 [URL03]
 4 - URL showing the evidence of a healthy backend application: http://ec2-54-172-55-41.compute-1.amazonaws.com:3030/api/status [URL04]
 5 - URL showing Prometheus server showing UP state: http://ec2-44-211-45-221.compute-1.amazonaws.com:9090/targets [URL05]
